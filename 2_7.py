@@ -71,3 +71,5 @@ for data in atom_data:
 r = r / len(atom_data)
 print('Center: ('+str(x_balance)+', '+str(y_balance)+', '+str(z_balance)+')')
 print('Radius: '+str(r))
+
+file.close()
