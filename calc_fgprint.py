@@ -9,4 +9,11 @@ from rdkit import Chem
 from rdkit.Chem import AllChem
 
 def calc_fgprint(mol):
-    return AllChem.GetMorganFingerprint(mol, 2)
+    data = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits = 2048)
+    set = []
+    for i in range(0,2048):
+        if data.GetBit(i):
+            set.append(1)
+        else:
+            set.append(0)
+    return set
