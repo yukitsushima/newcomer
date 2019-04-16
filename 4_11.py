@@ -14,5 +14,5 @@ from rdkit.Chem.Draw import rdMolDraw2D
 
 suppl = Chem.SDMolSupplier('./ci6b00005_si_002.txt', removeHs=False) #Supplier
 mols = [x for x in suppl if x is not None]
-Chem.Draw.MolToFile(mols[1], 'hoge.png', size=(500,500))
+Chem.Draw.MolToFile(mols[106], 'hoge.png', size=(500,500))
 print(len(mols))

@@ -14,13 +14,12 @@ from rdkit.Chem.Draw import rdMolDraw2D
 
 from sklearn import *
 from sklearn.svm import SVR
-from sklearn.model_selection import KFold
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import *
 
 #Load Mols
 suppl = Chem.SDMolSupplier('./ci6b00005_si_002.txt', removeHs=False) #Supplier
 mols = [x for x in suppl if x is not None]
-mols_set3 = mols[28:132]
+mols_set3 = mols[106:210]
 fingerprint = []
 for data in mols_set3:
     fingerprint.append(calc_fgprint(data))
@@ -32,7 +31,7 @@ RRCK_set3 = []
 for row in f:
     RRCK_set3.append(float(row[0]))
 
-svr = SVR(kernel='rbf', C=1e3, gamma=0.1)
+svr = SVR(kernel='rbf', C=10, gamma=0.01)
 """
 kf = KFold(n_splits=10, shuffle=True)
 for train_index, test_index in kf.split(fingerprint, RRCK_set3):
@@ -49,4 +48,6 @@ for train_index, test_index in kf.split(fingerprint, RRCK_set3):
     score = svr.fit(train_param, train_target).score(test_param, test_target)
     print(score)
 """
-print(cross_val_score(svr, fingerprint, RRCK_set3, cv=10))
+score = cross_val_score(svr, fingerprint, RRCK_set3, cv=10)
+print(sum(score)/len(score))
+#print(cross_validate(svr, fingerprint, RRCK_set3, cv=10)['test_score'])
