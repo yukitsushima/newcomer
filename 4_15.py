@@ -48,7 +48,7 @@ for train_index, test_index in kf.split(fingerprint, RRCK_set3):
     score = svr.fit(train_param, train_target).score(test_param, test_target)
     print(score)
 """
-
+print(svr.fit(fingerprint, RRCK_set3).get_params(True))
 score = cross_val_score(estimator=svr, X=fingerprint, y=RRCK_set3, cv=10, n_jobs=-1)
 print(sum(score)/len(score))
 #print(cross_validate(svr, fingerprint, RRCK_set3, cv=10)['test_score'])
