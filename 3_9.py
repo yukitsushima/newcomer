@@ -41,7 +41,7 @@ for train_index, test_index in kf.split(parameters, target):
         test_param.append(parameters[test_index[i]])
         test_target.append(target[test_index[i]])
     sys.stdout.write(str(counter)+'\t')
-    learn = svc.fit(parameters, target)
+    learn = svc.fit(train_param, train_target)
     print(str(precision_score(test_target, learn.predict(test_param)))[0:7]+'\t'\
          +str(recall_score(test_target, learn.predict(test_param)))[0:7]+'\t'\
          +str(matthews_corrcoef(test_target, learn.predict(test_param)))[0:7]+'\t'\
