@@ -1,7 +1,7 @@
 \documentclass[uplatex,a4j]{jsarticle}
 \usepackage[top=35truemm,bottom=30truemm,left=30truemm,right=30truemm]{geometry}
 %フォント設定
-\usepackage[deluxe,jis2004]{otf}
+%\usepackage[deluxe,jis2004]{otf}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{bm}
@@ -10,12 +10,14 @@
 \usepackage{amsmath,amssymb}
 \usepackage{latexsym}
 \usepackage{url}
+\usepackage{xcolor}
 
 \providecommand{\tabularnewline}{\\}
 \newcommand{\argmax}{\mathop{\rm argmax}\limits}
 \newcommand{\argmin}{\mathop{\rm argmin}\limits}
 
 \lstset{
+  language=Python,
  	%枠外に行った時の自動改行
  	breaklines = true,
  	%自動改行後のインデント量(デフォルトでは20[pt])
@@ -54,8 +56,61 @@
 \begin{document}
   \maketitle
   \section{配列情報処理}
-  \subsection{ヒト21番染色体の先頭コンティグのDNA配列を秋山研サーバから取得し、A/T/G/Cの各塩基数を出力せよ。}
-  \subsection{NT_113952.1.fastaの逆相補鎖を生成するプログラムを作成せよ。}
-  \subsection{ウィンドウ幅$w$、ステップ幅$s$で、ウィンドウ内のGC含量を出力するプログラムを作成し、NT_113952.1.fastaに$w=1000$、$s=300$で適用した結果をgnuplot等Excel以外のツールでプロットせよ。}
-
+  \subsection{ヒト21番染色体の先頭コンティグのDNA配列を秋山研サーバから取得し，A/T/G/Cの各塩基数を出力せよ．}
+  以下のように実行する．実行環境はPython2で，ghostgw上での動作を確認している．
+  \begin{lstlisting}[caption=実行方法, label=run1]
+    python 1_1.py /mnt/fs/ohue/newcomer/NT_113952.1.fasta
+  \end{lstlisting}
+  プログラム本体は以下の通りである．
+  \lstinputlisting[caption=1\_1.py, label=program1]{./1_1.py}
+  実行した結果が以下の通りである．
+  \lstinputlisting[caption=実行結果, label=result1]{./result_1_1.txt}
+  
+  \subsection{NT\_113952.1.fastaの逆相補鎖を生成するプログラムを作成せよ．}
+  以下のように実行する．実行環境はPython2で，ghostgw上での動作を確認している．
+  \begin{lstlisting}[caption=実行方法, label=run2]
+    python 1_2.py /mnt/fs/ohue/newcomer/NT_113952.1.fasta
+  \end{lstlisting}
+  プログラム本体は以下の通りである．
+  \lstinputlisting[caption=1\_2.py, label=program2]{./1_2.py}
+  \lstinputlisting[caption=rev.py, label=programrev]{./rev.py}
+  \lstinputlisting[caption=combine.py, label=programcombine]{./combine.py}
+  実行結果は別添する．
+  
+  \subsection{ウィンドウ幅$w$，ステップ幅$s$で，ウィンドウ内のGC含量を出力するプログラムを作成し，NT\_113952.1.fastaに$w=1000$，$s=300$で適用した結果をgnuplot等Excel以外のツールでプロットせよ．}
+  以下のように実行する．実行環境はPython2で，ghostgw上での動作を確認している．
+  \begin{lstlisting}[caption=実行方法, label=run3]
+    python 1_3.py /mnt/fs/ohue/newcomer/NT_113952.1.fasta 1000 300 > data.txt
+  \end{lstlisting}
+  プログラム本体は以下の通りである．また，\ref{programcombine}も使用する．
+  \lstinputlisting[caption=1\_3.py, label=program3]{./1_3.py}
+  実行結果をgnuplotで描画した結果以下のようになった．
+  \begin{figure}[htbp]
+    \begin{center}
+      \includegraphics[width=14cm]{1_3_plot.png}
+      \caption{グラフ}
+    \end{center}
+  \end{figure}
+  
+  \subsection{引数で与えられた部分配列を検索し，何文字目に現れたかを表示するプログラムを作成せよ(逆相補鎖上も検索すること)．部分配列をGAATTCおよびATGとし，NT\_113952.1.fastaに適用せよ．}
+  以下のように実行する．実行環境はPython2で，ghostgw上での動作を確認している．
+  \begin{lstlisting}[caption=実行方法, label=run4]
+    python 1_4.py /mnt/fs/ohue/newcomer/NT_113952.1.fasta GAATTC
+    python 1_4.py /mnt/fs/ohue/newcomer/NT_113952.1.fasta ATG
+  \end{lstlisting}
+  プログラム本体は以下の通りである．また，\ref{programrev}と\ref{programcombine}も使用する．
+  \lstinputlisting[caption=1\_4.py, label=program4]{./1_4.py}
+  \lstinputlisting[caption=findall.py, label=programfindall]{./findall.py}
+  実行した結果が以下の通りである．ただし、ATGの結果については極端に長いため別添する。
+  \lstinputlisting[caption=実行結果(GAATTC), label=result4]{./result_1_4_GAATTC.txt}
+  
+  \subsection{NT\_113952.1.fastaを6つの読み枠でアミノ酸配列に変換せよ．Stopコドンはアンダースコアで表示すること．}
+  以下のように実行する．実行環境はPython2で，ghostgw上での動作を確認している．
+  \begin{lstlisting}[caption=実行方法, label=run5]
+    python 1_5.py /mnt/fs/ohue/newcomer/NT_113952.1.fasta
+  \end{lstlisting}
+  プログラム本体は以下の通りである．また，\ref{programrev}と\ref{programcombine}も使用する．
+  \lstinputlisting[caption=1\_5.py, label=program5]{./1_5.py}
+  \lstinputlisting[caption=decode.py, label=programdecode]{./decode.py}
+  
 \end{document}
