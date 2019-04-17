@@ -1,10 +1,11 @@
-#2019/04/11
+#2019/04/17
 #Yuki Tsushima
 #tsushima@bi.c.titech.ac.jp
 #For Python 2.7
 
 import math
 import sys
+import pymol
 
 #file open
 args = sys.argv
@@ -35,8 +36,8 @@ for line in lines:
         atom_name = line[12:16].strip()
         #identifier = line[16].strip()
         #res_name = line[17:20].strip()
-        #chain = line[21].strip()
-        #res_number = int(line[22:26])
+        chain = line[21].strip()
+        res_number = int(line[22:26])
         #res_code = line[26].strip()
         x = float(line[30:38])
         y = float(line[38:46])
@@ -53,7 +54,7 @@ for line in lines:
         z_weight = z_weight + z * WEIGHT[elem_symbol]
 
         #Register Atom Data
-        atom_data.append([x, y, z, atom_number, atom_name, elem_symbol])
+        atom_data.append([x, y, z, atom_number, atom_name, elem_symbol, chain, res_number])
 #IF no Data
 if total_weight == 0:
     sys.stderr.write('Chain '+args[2]+' does not exist.\n')
@@ -72,4 +73,23 @@ r = r / len(atom_data)
 print('Center: ('+str(x_balance)+', '+str(y_balance)+', '+str(z_balance)+')')
 print('Radius: '+str(r))
 
+#identify color
+red = []
+blue = []
+for data in atom_data:
+    if math.sqrt((data[0]-x_balance)**2+(data[1]-y_balance)**2+(data[2]-z_balance)**2) > r:
+        blue.append(data)
+    else:
+        red.append(data)
+
+#Launch PyMOL
+pymol.finish_launching()
+pymol.cmd.load(path)
+pymol.cmd.do("hide everything")
+pymol.cmd.do("show stick, chain "+args[2])
+#set color
+for data in red:
+    pymol.cmd.do("color red, (name "+data[4]+" and resi "+str(data[7])+" and chain "+data[6]+")")
+for data in blue:
+    pymol.cmd.do("color blue, (name "+data[4]+" and resi "+str(data[7])+" and chain "+data[6]+")")
 file.close()
