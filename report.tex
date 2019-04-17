@@ -63,7 +63,7 @@
   \begin{lstlisting}[caption=実行方法, label=run1]
     python 1_1.py /mnt/fs/ohue/newcomer/NT_113952.1.fasta
   \end{lstlisting}
-  プログラム本体は以下の通りである．fastaファイルの塩基配列について、行ごとにPythonの機能で各文字の出現回数をカウントする。
+  プログラム本体は以下の通りである．fastaファイルの塩基配列について，行ごとにPythonの機能で各文字の出現回数をカウントする．
   \lstinputlisting[caption=1\_1.py, label=program1]{./1_1.py}
   実行した結果が以下の通りである．
   \lstinputlisting[caption=実行結果, label=result1]{./result_1_1.txt}
@@ -103,7 +103,7 @@
   プログラム本体は以下の通りである．また，\ref{programrev}と\ref{programcombine}も使用する．
   \lstinputlisting[caption=1\_4.py, label=program4]{./1_4.py}
   \lstinputlisting[caption=findall.py, label=programfindall]{./findall.py}
-  実行した結果が以下の通りである．ただし，ATGの結果については極端に長いためresult\_1\_4\_ATG.txtとして別添する。
+  実行した結果が以下の通りである．ただし，ATGの結果については極端に長いためresult\_1\_4\_ATG.txtとして別添する．
   \lstinputlisting[caption=実行結果(GAATTC), label=result4]{./result_1_4_GAATTC.txt}
   
   \subsection{NT\_113952.1.fastaを6つの読み枠でアミノ酸配列に変換せよ．Stopコドンはアンダースコアで表示すること．}
@@ -118,8 +118,8 @@
   \lstinputlisting[caption=実行結果, label=result5]{./result_1_5.txt}
   
   \section{タンパク質構造情報処理}
-  \subsection{PyMOLソフトウェアを利用し，ヒトのヘモグロビンの構造をチェインごとに異なる色で表示し，4量体であることを確認せよ。また，Aチェインだけを表示し，タンパク質鎖をcartoon表示して2次構造に従って色付けし，結合するヘムをstick表示して原子ごとに色分けせよ。}
-  チェインごとに色分けしたヘモグロビンが画像\ref{2_6_1}である。
+  \subsection{PyMOLソフトウェアを利用し，ヒトのヘモグロビンの構造をチェインごとに異なる色で表示し，4量体であることを確認せよ．また，Aチェインだけを表示し，タンパク質鎖をcartoon表示して2次構造に従って色付けし，結合するヘムをstick表示して原子ごとに色分けせよ．}
+  チェインごとに色分けしたヘモグロビンが画像\ref{2_6_1}である．
   \begin{figure}[H]
     \begin{center}
       \includegraphics[width=12cm]{1BUW.png}
@@ -127,7 +127,7 @@
       \label{2_6_1}
     \end{center}
   \end{figure}
-  また，Aチェインとヘムを表示したものが画像\ref{2_6_2}である。
+  また，Aチェインとヘムを表示したものが画像\ref{2_6_2}である．
   \begin{figure}[H]
     \begin{center}
       \includegraphics[width=12cm]{hem.png}
@@ -136,29 +136,41 @@
     \end{center}
   \end{figure}
   
-  \subsection{PDBファイル名とチェイン名を引数にして、その回転半径を計算するプログラムを作成せよ。}
-  以下のプログラムを作成した。実行環境はAnaconda3のPython 2.7環境である。
+  \subsection{PDBファイル名とチェイン名を引数にして，その回転半径を計算するプログラムを作成せよ．}
+  \subsection{上記のプログラムの結果を利用し，PyMOLで重心から回転半径の範囲内にある原子を赤で，範囲外にある原子を青で色付けせよ．}
+  この2つは一緒に行い，以下のプログラムを作成した．実行環境はAnaconda3のPython 2.7環境である．
   \lstinputlisting[caption=2\_7.py, label=program6]{./2_7.py}
-  このプログラムを次のように実行する。
+  このプログラムを次のように実行する．
   \begin{lstlisting}[caption=実行方法, label=run6]
     python 2_7.py ./1BUW.pdb A
   \end{lstlisting}
-  結果は次の通りである。
+  結果は次の通りである．
   \lstinputlisting[caption=実行結果, label=result6]{./result_2_7.txt}
-  
-  \subsection{上記のプログラムの結果を利用し、PyMOLで重心から回転半径の範囲内にある原子を赤で、範囲外にある原子を青で色付けせよ。}
+  また，描画結果として以下の画像を得た．
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=12cm]{2_8.png}
+      \caption{回転半径}
+      \label{2_8}
+    \end{center}
+  \end{figure}
   
   \section{機械学習}
-  \subsection{Pythonのscikit-learnのSVMでionosphereのデータの10-fold Cross Validationを実施せよ。予測性能としてprecision、recall、MCC、ROC曲線のAUC値(AUROC)、F-scoreを求めよ。カーネルはRBFカーネルとし、パラメータは適宜定めよ。}
-  作成したプログラムを下に示す。Anaconda3のPython2.7環境で動作する。
+  \subsection{Pythonのscikit-learnのSVMでionosphereのデータの10-fold Cross Validationを実施せよ．予測性能としてprecision，recall，MCC，ROC曲線のAUC値(AUROC)，F-scoreを求めよ．カーネルはRBFカーネルとし，パラメータは適宜定めよ．}
+  作成したプログラムを\ref{program7}に示す．Anaconda3のPython2.7環境で動作する．
   \lstinputlisting[caption=3\_9.py, label=program7]{./3_9.py}
-  また、ionosphere.scaleの読み込みにあたって、欠番のパラメータを0で補完するなどの処理を行うため、読み込み部分は別のプログラムとして分離した。
+  また，ionosphere.scaleの読み込みにあたって，欠番のパラメータを0で補完するなどの処理を行うため，読み込み部分は別のプログラム\ref{program8}として分離した．
   \lstinputlisting[caption=load\_ionosphere.py, label=program8]{./load_ionosphere.py}
-  実行した結果を以下に示す。
+  実行した結果を\ref{result7}に示す．
   \lstinputlisting[caption=実行結果, label=result7]{./result_3_9.txt}
   
-  \subsection{ionosphereデータにおいて、より良いRBFカーネルパラメータ$\gamma$とコストパラメータ$C$の値を探索せよ。評価方法は10-fold Cross Validationとし、評価基準はAUROCとF-scoreの2通りを試すこと。}
+  \subsection{ionosphereデータにおいて，より良いRBFカーネルパラメータ$\gamma$とコストパラメータ$C$の値を探索せよ．評価方法は10-fold Cross Validationとし，評価基準はAUROCとF-scoreの2通りを試すこと．}
+  作成したプログラムを\ref{program9}に示す．Anaconda3のPython2.7環境で動作する．
+  \lstinputlisting[caption=3\_10.py, label=program9]{./3_10.py}
+  実行した結果を\ref{result9}に示す．
+  \lstinputlisting[caption=実行結果, label=result9]{./result_3_10.txt}
   
   \section{創薬情報処理・機械学習}
+  \subsection{(準備1)PythonにRDKitをインストールし，}
   
 \end{document}
