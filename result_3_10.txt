@@ -1,0 +1,6 @@
+Evaluate with AUROC
+{'C': 10, 'gamma': 1}
+0.9860481909394953
+Evaluate with F-score
+{'C': 10, 'gamma': 0.1}
+0.9616653503831382
