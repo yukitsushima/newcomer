@@ -1,0 +1,12 @@
+PEPTIDE 1
+Met Ile Val Met Asn Ser Asn Cys Cys Leu Cys Arg Pro Thr Arg Phe Leu Thr Ser Leu Ser Tyr His Phe Leu Leu Ser Tyr Leu Leu Ser Lys Cys Ile Gln Met Lys Gly Cys Gly Glu Cys _
+PEPTIDE 2
+Met Pro Arg Glu Ile Ser Arg Ser Ser Val Pro Cys _
+PEPTIDE 3
+Met Pro _
+PEPTIDE 4
+Met Leu Arg Thr Leu Leu Leu Ile Val _
+PEPTIDE 5
+Met Gln Asn Lys Phe Ile Arg His _
+PEPTIDE 6
+Met Gly Arg Lys Asp Lys Ala Ala Ile _
