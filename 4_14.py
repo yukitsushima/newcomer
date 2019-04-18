@@ -31,23 +31,7 @@ RRCK_set3 = []
 for row in f:
     RRCK_set3.append(float(row[0]))
 
-svr = SVR(kernel='rbf', C=10, gamma=0.01)
-"""
-kf = KFold(n_splits=10, shuffle=True)
-for train_index, test_index in kf.split(fingerprint, RRCK_set3):
-    train_param  = []
-    train_target = []
-    test_param   = []
-    test_target  = []
-    for i in range(0,len(train_index)):
-        train_param.append(fingerprint[train_index[i]])
-        train_target.append(RRCK_set3[train_index[i]])
-    for i in range(0,len(test_index)):
-        test_param.append(fingerprint[test_index[i]])
-        test_target.append(RRCK_set3[test_index[i]])
-    score = svr.fit(train_param, train_target).score(test_param, test_target)
-    print(score)
-"""
+svr = SVR(kernel='rbf', C=100, gamma=0.01)
 
 score = cross_val_score(estimator=svr, X=fingerprint, y=RRCK_set3, cv=10, n_jobs=-1)
 print(sum(score)/len(score))

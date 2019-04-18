@@ -1,4 +1,4 @@
-#2019/04/15
+#2019/04/18
 #Yuki Tsushima
 #tsushima@bi.c.titech.ac.jp
 #For Python 3.7
@@ -15,6 +15,8 @@ from rdkit.Chem.Draw import rdMolDraw2D
 from sklearn import *
 from sklearn.svm import SVR
 from sklearn.model_selection import *
+from sklearn.metrics import mean_squared_error, r2_score
+import numpy as np
 
 #Load Mols
 suppl = Chem.SDMolSupplier('./ci6b00005_si_002.txt', removeHs=False) #Supplier
@@ -31,24 +33,10 @@ RRCK_set3 = []
 for row in f:
     RRCK_set3.append(float(row[0]))
 
-svr = SVR(kernel='rbf', C=10, gamma=0.01)
-"""
-kf = KFold(n_splits=10, shuffle=True)
-for train_index, test_index in kf.split(fingerprint, RRCK_set3):
-    train_param  = []
-    train_target = []
-    test_param   = []
-    test_target  = []
-    for i in range(0,len(train_index)):
-        train_param.append(fingerprint[train_index[i]])
-        train_target.append(RRCK_set3[train_index[i]])
-    for i in range(0,len(test_index)):
-        test_param.append(fingerprint[test_index[i]])
-        test_target.append(RRCK_set3[test_index[i]])
-    score = svr.fit(train_param, train_target).score(test_param, test_target)
-    print(score)
-"""
-print(svr.fit(fingerprint, RRCK_set3).get_params(True))
-score = cross_val_score(estimator=svr, X=fingerprint, y=RRCK_set3, cv=10, n_jobs=-1)
-print(sum(score)/len(score))
-#print(cross_validate(svr, fingerprint, RRCK_set3, cv=10)['test_score'])
+param_grid = {'C':[0.001, 0.01, 0.1, 1, 10, 100, 1000], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100, 1000]}
+def rmse(y, y_pred):
+    return np.sqrt(mean_squared_error(y, y_pred))
+search = GridSearchCV(estimator=SVR(), param_grid=param_grid, scoring='neg_mean_squared_error',cv=10, iid=False).fit(fingerprint, RRCK_set3)
+print('R2_score : {}'.format(r2_score(RRCK_set3, search.predict(fingerprint))))
+print('RMSE : {}'.format(rmse(RRCK_set3, search.predict(fingerprint))))
+print('best_params : {}'.format(search.best_params_))
