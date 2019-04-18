@@ -9,12 +9,10 @@ import csv
 import sys
 from calc_fgprint import calc_fgprint
 from rdkit import rdBase, Chem
-from rdkit.Chem import AllChem, Draw
-from rdkit.Chem.Draw import rdMolDraw2D
 
-from sklearn import *
+from sklearn import svm, model_selection, metrics
 from sklearn.svm import SVR
-from sklearn.model_selection import *
+from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_squared_error, r2_score
 import numpy as np
 
