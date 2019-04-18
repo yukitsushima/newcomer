@@ -33,5 +33,5 @@ for row in f:
 
 svr = SVR(kernel='rbf', C=100, gamma=0.01)
 
-score = cross_val_score(estimator=svr, X=fingerprint, y=RRCK_set3, cv=10, n_jobs=-1)
+score = cross_val_score(estimator=svr, X=fingerprint, y=RRCK_set3, cv=10)
 print(sum(score)/len(score))
