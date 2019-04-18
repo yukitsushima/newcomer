@@ -35,4 +35,3 @@ svr = SVR(kernel='rbf', C=100, gamma=0.01)
 
 score = cross_val_score(estimator=svr, X=fingerprint, y=RRCK_set3, cv=10, n_jobs=-1)
 print(sum(score)/len(score))
-#print(cross_validate(svr, fingerprint, RRCK_set3, cv=10)['test_score'])

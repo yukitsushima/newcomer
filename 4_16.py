@@ -62,10 +62,12 @@ RRCK_set8 = []
 for row in f8:
     RRCK_set8.append(float(row[0]))
 
+#Learn
 svr = SVR(kernel='rbf', C=100, gamma=0.01).fit(finger3, RRCK_set3)
 def rmse(y, y_pred):
     return np.sqrt(mean_squared_error(y, y_pred))
 
+#Predict and output
 pre1 = svr.predict(finger1)
 with codecs.open('predict1.csv', 'w', 'utf-8') as f:
     for i in range(0,len(pre1)):
