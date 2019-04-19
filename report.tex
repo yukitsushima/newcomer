@@ -19,7 +19,7 @@
 \newcommand{\argmin}{\mathop{\rm argmin}\limits}
 
 \lstset{
-  language=Python,
+  %language=Python,
  	%枠外に行った時の自動改行
  	breaklines = true,
  	%自動改行後のインデント量(デフォルトでは20[pt])
@@ -171,6 +171,61 @@
   \lstinputlisting[caption=実行結果, label=result9]{./result_3_10.txt}
   
   \section{創薬情報処理・機械学習}
-  \subsection{(準備1)PythonにRDKitをインストールし，}
+  \subsection{(準備1)PythonにRDKitをインストールし，化合物ファイル(SDFファイル)を読み込んで構造式が出力できることを確認せよ．}
+  省略する．
+  
+  \subsection{(準備2)論文Leung SSF, et al. J Chem Inf Model 56: 924-020, 2016.のSupporting Informationより，3D SDFファイル(TXT)とPDFファイルをダウンロードせよ．Table S1の実験値「RRCK Log P$_\text{app}$」の値をパース(転記)し，CSVファイル等で準備せよ．}
+  省略する．
+  
+  \subsection{(準備3)所望の化合物に対し，RDKitのECFP4 fingerprintを計算できるようにせよ．}
+  calc\_fgprint関数を作成した。コードは\ref{calc}の通りである。
+  \lstinputlisting[caption=calc\_fgprint.py, label=calc]{./calc_fgprint.py}
+  
+  \subsection{RRCK Log P$_\text{app}$を目的関数，ECFP4 fingerprintを特徴ベクトルとして，Data Set 3(医薬品104化合物)に関して回帰(10-fold Cross Validation)を行う機械学習プログラムを作成せよ．学習器はSupport Vector Regressionとし，カーネルはRBFカーネルとすること．}
+  スクリプト\ref{code414}を作成した。
+  \lstinputlisting[caption=4\_14.py, label=code414]{./4_14.py}
+  実行結果は\ref{result414}の通りである。
+  \lstinputlisting[caption=実行結果, label=result414]{./result_4_14.txt}
+  
+  \subsection{10-fold Cross Validationによって，RRCK Log P$_\text{app}$の予測値との平均2乗誤差(RMSE)が最も小さくなるパラメータを探索せよ．またそのときのRMSEと$R^2$値を求めよ．}
+  スクリプト\ref{code415}を作成した。
+  \lstinputlisting[caption=4\_15.py, label=code415]{./4_15.py}
+  実行結果は\ref{result415}の通りである。
+  \lstinputlisting[caption=実行結果, label=result415]{./result_4_15.txt}
+  
+  \subsection{(15)で決めたパラメータの学習器で，Data Set 1(環状ペプチド7化合物)，Data Set 4(環状ペプチド16化合物)，Data Set 8(環状ペプチド22化合物)のRRCK Log P$_\text{app}$の予測値を求めよ．それぞれのData SetごとにRMSEと$R^2$値を求め，予測値と実験値の散布図を描け．}
+  スクリプト\ref{code416}を作成した。
+  \lstinputlisting[caption=4\_16.py, label=code416]{./4_16.py}
+  実行結果は\ref{result416}の通りである。
+  \lstinputlisting[caption=実行結果, label=result416]{./result_4_16.txt}
+  また、実験値と予測値の散布図は出力したファイルからGnuplotで描画した。図\ref{1}、\ref{3}、\ref{4}、\ref{8}を得た。
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=14cm]{pre1.pdf}
+      \caption{Data Set 1}
+      \label{1}
+    \end{center}
+  \end{figure}
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=14cm]{pre3.pdf}
+      \caption{Data Set 3}
+      \label{3}
+    \end{center}
+  \end{figure}
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=14cm]{pre4.pdf}
+      \caption{Data Set 4}
+      \label{4}
+    \end{center}
+  \end{figure}
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=14cm]{pre8.pdf}
+      \caption{Data Set 8}
+      \label{8}
+    \end{center}
+  \end{figure}
   
 \end{document}
