@@ -19,7 +19,7 @@
 \newcommand{\argmin}{\mathop{\rm argmin}\limits}
 
 \lstset{
-  %language=Python,
+  %language=bash,
  	%枠外に行った時の自動改行
  	breaklines = true,
  	%自動改行後のインデント量(デフォルトでは20[pt])
@@ -63,8 +63,7 @@
   \begin{lstlisting}[caption=実行方法, label=run1]
     python 1_1.py /mnt/fs/ohue/newcomer/NT_113952.1.fasta
   \end{lstlisting}
-  プログラム本体は以下の通りである．fastaファイルの塩基配列について，行ごとにPythonの機能で各文字の出現回数をカウントする．
-  \lstinputlisting[caption=1\_1.py, label=program1]{./1_1.py}
+  プログラム本体は{\tt 1\_1.py}である．fastaファイルの塩基配列について，行ごとにPythonの機能で各文字の出現回数をカウントする．
   実行した結果が以下の通りである．
   \lstinputlisting[caption=実行結果, label=result1]{./result_1_1.txt}
   
@@ -73,10 +72,7 @@
   \begin{lstlisting}[caption=実行方法, label=run2]
     python 1_2.py /mnt/fs/ohue/newcomer/NT_113952.1.fasta
   \end{lstlisting}
-  プログラム本体は以下の通りである．
-  \lstinputlisting[caption=1\_2.py, label=program2]{./1_2.py}
-  \lstinputlisting[caption=rev.py, label=programrev]{./rev.py}
-  \lstinputlisting[caption=combine.py, label=programcombine]{./combine.py}
+  プログラム本体は{\tt 1\_2.py}と{\tt rev.py}，{\tt combine.py}である．
   実行結果はresult\_1\_2.txtとして別添する．
   
   \subsection{ウィンドウ幅$w$，ステップ幅$s$で，ウィンドウ内のGC含量を出力するプログラムを作成し，NT\_113952.1.fastaに$w=1000$，$s=300$で適用した結果をgnuplot等Excel以外のツールでプロットせよ．}
@@ -84,8 +80,7 @@
   \begin{lstlisting}[caption=実行方法, label=run3]
     python 1_3.py /mnt/fs/ohue/newcomer/NT_113952.1.fasta 1000 300 > data.txt
   \end{lstlisting}
-  プログラム本体は以下の通りである．また，\ref{programcombine}も使用する．
-  \lstinputlisting[caption=1\_3.py, label=program3]{./1_3.py}
+  プログラム本体は{\tt 1\_3.py}である．また，{\tt combine.py}も使用する．
   実行結果をgnuplotで描画した結果以下のようになった．
   \begin{figure}[htbp]
     \begin{center}
@@ -100,9 +95,7 @@
     python 1_4.py /mnt/fs/ohue/newcomer/NT_113952.1.fasta GAATTC
     python 1_4.py /mnt/fs/ohue/newcomer/NT_113952.1.fasta ATG
   \end{lstlisting}
-  プログラム本体は以下の通りである．また，\ref{programrev}と\ref{programcombine}も使用する．
-  \lstinputlisting[caption=1\_4.py, label=program4]{./1_4.py}
-  \lstinputlisting[caption=findall.py, label=programfindall]{./findall.py}
+  プログラム本体は{\tt 1\_4.py}と{\tt findall.py}である．また，{\tt rev.py}と{\tt combine.py}も使用する．
   実行した結果が以下の通りである．ただし，ATGの結果については極端に長いためresult\_1\_4\_ATG.txtとして別添する．
   \lstinputlisting[caption=実行結果(GAATTC), label=result4]{./result_1_4_GAATTC.txt}
   
@@ -111,9 +104,7 @@
   \begin{lstlisting}[caption=実行方法, label=run5]
     python 1_5.py /mnt/fs/ohue/newcomer/NT_113952.1.fasta
   \end{lstlisting}
-  プログラム本体は以下の通りである．また，\ref{programrev}と\ref{programcombine}も使用する．
-  \lstinputlisting[caption=1\_5.py, label=program5]{./1_5.py}
-  \lstinputlisting[caption=decode.py, label=programdecode]{./decode.py}
+  プログラム本体は{\tt 1\_5.py}と{\tt decode.py}である．また，{\tt rev.py}と{\tt combine.py}も使用する．
   実行した結果が以下の通りである．
   \lstinputlisting[caption=実行結果, label=result5]{./result_1_5.txt}
   
@@ -138,8 +129,7 @@
   
   \subsection{PDBファイル名とチェイン名を引数にして，その回転半径を計算するプログラムを作成せよ．}
   \subsection{上記のプログラムの結果を利用し，PyMOLで重心から回転半径の範囲内にある原子を赤で，範囲外にある原子を青で色付けせよ．}
-  この2つは一緒に行い，以下のプログラムを作成した．実行環境はAnaconda3のPython 2.7環境である．
-  \lstinputlisting[caption=2\_7.py, label=program6]{./2_7.py}
+  この2つは一緒に行い，プログラム{\tt 2\_7.py}を作成した．実行環境はAnaconda3のPython 2.7環境である．
   このプログラムを次のように実行する．
   \begin{lstlisting}[caption=実行方法, label=run6]
     python 2_7.py ./1BUW.pdb A
@@ -157,16 +147,13 @@
   
   \section{機械学習}
   \subsection{Pythonのscikit-learnのSVMでionosphereのデータの10-fold Cross Validationを実施せよ．予測性能としてprecision，recall，MCC，ROC曲線のAUC値(AUROC)，F-scoreを求めよ．カーネルはRBFカーネルとし，パラメータは適宜定めよ．}
-  作成したプログラムを\ref{program7}に示す．Anaconda3のPython2.7環境で動作する．
-  \lstinputlisting[caption=3\_9.py, label=program7]{./3_9.py}
-  また，ionosphere.scaleの読み込みにあたって，欠番のパラメータを0で補完するなどの処理を行うため，読み込み部分は別のプログラム\ref{program8}として分離した．
-  \lstinputlisting[caption=load\_ionosphere.py, label=program8]{./load_ionosphere.py}
+  プログラム{\tt 3\_9.py}を作成した．Anaconda3のPython2.7環境で動作する．
+  また，ionosphere.scaleの読み込みにあたって，欠番のパラメータを0で補完するなどの処理を行うため，読み込み部分は別のプログラム{\tt load\_ionosphere.py}として分離した．
   実行した結果を\ref{result7}に示す．
   \lstinputlisting[caption=実行結果, label=result7]{./result_3_9.txt}
   
   \subsection{ionosphereデータにおいて，より良いRBFカーネルパラメータ$\gamma$とコストパラメータ$C$の値を探索せよ．評価方法は10-fold Cross Validationとし，評価基準はAUROCとF-scoreの2通りを試すこと．}
-  作成したプログラムを\ref{program9}に示す．Anaconda3のPython2.7環境で動作する．
-  \lstinputlisting[caption=3\_10.py, label=program9]{./3_10.py}
+  プログラム{\tt 3\_10.py}を作成した．Anaconda3のPython2.7環境で動作する．
   実行した結果を\ref{result9}に示す．
   \lstinputlisting[caption=実行結果, label=result9]{./result_3_10.txt}
   
@@ -178,51 +165,47 @@
   省略する．
   
   \subsection{(準備3)所望の化合物に対し，RDKitのECFP4 fingerprintを計算できるようにせよ．}
-  calc\_fgprint関数を作成した。コードは\ref{calc}の通りである。
-  \lstinputlisting[caption=calc\_fgprint.py, label=calc]{./calc_fgprint.py}
+  calc\_fgprint関数を作成した．コードは{\tt calc\_fgprint.py}の通りである．
   
   \subsection{RRCK Log P$_\text{app}$を目的関数，ECFP4 fingerprintを特徴ベクトルとして，Data Set 3(医薬品104化合物)に関して回帰(10-fold Cross Validation)を行う機械学習プログラムを作成せよ．学習器はSupport Vector Regressionとし，カーネルはRBFカーネルとすること．}
-  スクリプト\ref{code414}を作成した。
-  \lstinputlisting[caption=4\_14.py, label=code414]{./4_14.py}
-  実行結果は\ref{result414}の通りである。
+  スクリプト{\tt 4\_14.py}を作成した．
+  実行結果は\ref{result414}の通りである．
   \lstinputlisting[caption=実行結果, label=result414]{./result_4_14.txt}
   
   \subsection{10-fold Cross Validationによって，RRCK Log P$_\text{app}$の予測値との平均2乗誤差(RMSE)が最も小さくなるパラメータを探索せよ．またそのときのRMSEと$R^2$値を求めよ．}
-  スクリプト\ref{code415}を作成した。
-  \lstinputlisting[caption=4\_15.py, label=code415]{./4_15.py}
-  実行結果は\ref{result415}の通りである。
+  スクリプト{\tt 4\_15.py}を作成した．
+  実行結果は\ref{result415}の通りである．
   \lstinputlisting[caption=実行結果, label=result415]{./result_4_15.txt}
   
   \subsection{(15)で決めたパラメータの学習器で，Data Set 1(環状ペプチド7化合物)，Data Set 4(環状ペプチド16化合物)，Data Set 8(環状ペプチド22化合物)のRRCK Log P$_\text{app}$の予測値を求めよ．それぞれのData SetごとにRMSEと$R^2$値を求め，予測値と実験値の散布図を描け．}
-  スクリプト\ref{code416}を作成した。
-  \lstinputlisting[caption=4\_16.py, label=code416]{./4_16.py}
-  実行結果は\ref{result416}の通りである。
+  スクリプト{\tt 4\_16.py}を作成した．
+  実行結果は\ref{result416}の通りである．
   \lstinputlisting[caption=実行結果, label=result416]{./result_4_16.txt}
-  また、実験値と予測値の散布図は出力したファイルからGnuplotで描画した。図\ref{1}、\ref{3}、\ref{4}、\ref{8}を得た。
+  また，実験値と予測値の散布図は出力したファイルからGnuplotで描画した．図\ref{1}，\ref{3}，\ref{4}，\ref{8}を得た．
   \begin{figure}[H]
     \begin{center}
-      \includegraphics[width=14cm]{pre1.pdf}
+      \includegraphics[width=13cm]{pre1.pdf}
       \caption{Data Set 1}
       \label{1}
     \end{center}
   \end{figure}
   \begin{figure}[H]
     \begin{center}
-      \includegraphics[width=14cm]{pre3.pdf}
+      \includegraphics[width=13cm]{pre3.pdf}
       \caption{Data Set 3}
       \label{3}
     \end{center}
   \end{figure}
   \begin{figure}[H]
     \begin{center}
-      \includegraphics[width=14cm]{pre4.pdf}
+      \includegraphics[width=13cm]{pre4.pdf}
       \caption{Data Set 4}
       \label{4}
     \end{center}
   \end{figure}
   \begin{figure}[H]
     \begin{center}
-      \includegraphics[width=14cm]{pre8.pdf}
+      \includegraphics[width=13cm]{pre8.pdf}
       \caption{Data Set 8}
       \label{8}
     \end{center}
