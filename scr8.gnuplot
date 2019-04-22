@@ -1,0 +1,7 @@
+set datafile separator ","
+set xlabel "Actual"
+set ylabel "Predict"
+set title "Data Set 8"
+file = "./predict8.csv"
+plot file u 1:2 title "DATA"
+replot x title "CORRECT"
